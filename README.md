@@ -1,1 +1,1 @@
-# react-use-mousetrail
+# react-mousetrail
