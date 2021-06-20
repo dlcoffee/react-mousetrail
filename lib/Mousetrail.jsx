@@ -8,38 +8,29 @@ class Point {
   }
 }
 
-const Mousetrail = () => {
-  const canvasEl = useRef(null)
-  const requestRef = useRef()
+const Mousetrail = (props) => {
+  const {
+    height = 0,
+    width = 0,
+    color = 'rgb(152,236,60)',
+    lineWidth = 4,
+    maxAge = 160,
+    ...other
+  } = props
+
+  const canvasRef = useRef(null)
   const pointsRef = useRef([])
+  const requestRef = useRef()
   const starttimeRef = useRef(null)
-
-  const [windowSize, setWindowSize] = useState({
-    width: undefined,
-    height: undefined,
-  })
-
-  useEffect(() => {
-    const handleResize = () => {
-      setWindowSize({
-        width: window.innerWidth,
-        height: window.innerHeight,
-      })
-    }
-
-    window.addEventListener('resize', handleResize)
-    handleResize() // needs to be called immediately to update state in the initial render
-
-    return () => window.removeEventListener('resize', handleResize)
-  }, [])
 
   useEffect(() => {
     const handleMovement = ({ clientX, clientY }) => {
-      if (!canvasEl.current) {
+      if (!canvasRef?.current) {
         return
       }
-      const x = clientX - canvasEl.current.offsetLeft
-      const y = clientY - canvasEl.current.offsetTop
+
+      const x = clientX - canvasRef.current.offsetLeft
+      const y = clientY - canvasRef.current.offsetTop
 
       const point = new Point(x, y)
       pointsRef.current.push(point)
@@ -52,17 +43,16 @@ const Mousetrail = () => {
 
   useEffect(() => {
     const animate = (timestamp) => {
-      if (!canvasEl.current) {
+      if (!canvasRef?.current) {
         return
-      } // fix
+      }
+
       if (!starttimeRef.current) {
         starttimeRef.current = timestamp
       }
 
-      const ctx = canvasEl.current.getContext('2d')
+      const ctx = canvasRef.current.getContext('2d')
       ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height)
-
-      const maxAgeMS = 160
 
       for (let i = 0; i < pointsRef.current.length; i++) {
         const currentPoint = pointsRef.current[i]
@@ -80,13 +70,13 @@ const Mousetrail = () => {
 
         const elapsed = timestamp - currentPoint.timestamp
 
-        if (elapsed > maxAgeMS) {
+        if (elapsed > maxAge) {
           pointsRef.current.shift()
         } else {
           ctx.lineJoin = 'round'
-          ctx.lineWidth = 4
+          ctx.lineWidth = lineWidth
 
-          ctx.strokeStyle = `#f87060`
+          ctx.strokeStyle = color
 
           ctx.beginPath()
 
@@ -104,15 +94,10 @@ const Mousetrail = () => {
     requestRef.current = requestAnimationFrame(animate)
 
     return () => cancelAnimationFrame(requestRef.current)
-  }, [])
+  }, [color, lineWidth, maxAge])
 
   return (
-    <canvas
-      ref={canvasEl}
-      height={windowSize.height}
-      width={windowSize.width}
-      style={{ position: 'fixed', top: 0, left: 0 }}
-    ></canvas>
+    <canvas {...other} ref={canvasRef} height={height} width={width}></canvas>
   )
 }
 
