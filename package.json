@@ -1,5 +1,5 @@
 {
-  "name": "react-use-mousetrail",
+  "name": "react-mousetrail",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -8,12 +8,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/dlcoffee/react-use-mousetrail.git"
+    "url": "git+https://github.com/dlcoffee/react-mousetrail.git"
   },
   "author": "daniel tea",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/dlcoffee/react-use-mousetrail/issues"
+    "url": "https://github.com/dlcoffee/react-mousetrail/issues"
   },
-  "homepage": "https://github.com/dlcoffee/react-use-mousetrail#readme"
+  "homepage": "https://github.com/dlcoffee/react-mousetrail#readme"
 }
