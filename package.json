@@ -1,6 +1,6 @@
 {
   "name": "react-mousetrail",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "react canvas mousetrail",
   "main": "index.js",
   "scripts": {
