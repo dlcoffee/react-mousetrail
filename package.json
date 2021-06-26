@@ -1,8 +1,8 @@
 {
   "name": "react-mousetrail",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "react canvas mousetrail",
-  "main": "index.js",
+  "main": "build/index.js",
   "scripts": {
     "start": "webpack --watch",
     "build": "webpack",
