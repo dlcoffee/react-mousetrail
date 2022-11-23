@@ -1,6 +1,6 @@
 {
   "name": "react-mousetrail",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "react canvas mousetrail",
   "main": "build/index.js",
   "scripts": {
@@ -20,7 +20,7 @@
   "homepage": "https://github.com/dlcoffee/react-mousetrail#readme",
   "dependencies": {},
   "peerDependencies": {
-    "react": "^17.0.2"
+    "react": "^18.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.14.6",
